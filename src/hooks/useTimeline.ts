@@ -1,16 +1,14 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { parseMedia } from '@remotion/media-parser';
 import { webFileReader } from '@remotion/media-parser/web-file';
 import { 
   TimelineTrack, 
-  Media, 
+
   MediaType, 
-  TimeInSeconds,
   ImageData,
   TextData,
   VideoData
 } from '../types/editor';
-import { getTotalDuration, createTimeSegment } from '../utils/duration';
 import { useTimelineStore } from '../store/timelineStore';
 import { usePlaybackStore } from '../store/playbackStore';
 
@@ -18,16 +16,16 @@ interface UseTimelineOptions {
   initialTracks?: TimelineTrack[];
 }
 
-export const useTimeline = (options: UseTimelineOptions = {}) => {
+export const useTimeline = (_options: UseTimelineOptions = {}) => {
   const {
     tracks,
     selectedTrackIds,
     addMedia,
     selectTrack,
-    deselectTrack
+
   } = useTimelineStore();
 
-  const { currentTime, seek } = usePlaybackStore();
+  const { currentTime } = usePlaybackStore();
 
   // Add media item to selected track
   const addItem = useCallback((

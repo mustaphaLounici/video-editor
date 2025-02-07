@@ -1,13 +1,10 @@
 import { create } from 'zustand';
 import { 
   Timeline, 
-  TimelineTrack, 
   Media, 
   MediaType, 
   TimeInSeconds,
-  ImageMedia,
-  TextMedia,
-  VideoMedia,
+
   ImageData,
   TextData,
   VideoData

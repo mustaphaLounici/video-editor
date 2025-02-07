@@ -1,9 +1,9 @@
 import { Player, PlayerRef, CallbackListener } from '@remotion/player';
-import { useCallback, useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { VideoComposition } from './VideoComposition';
 import { useTimelineStore } from '../store/timelineStore';
 import { usePlaybackStore } from '../store/playbackStore';
-import { CompositionConfig, Frame, TimeInSeconds } from '../types/editor';
+import { CompositionConfig } from '../types/editor';
 import { secondsToFrames, framesToSeconds } from '../utils/duration';
 
 // Default composition config

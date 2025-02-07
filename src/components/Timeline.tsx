@@ -4,19 +4,19 @@ import { useTimelineStore } from '../store/timelineStore';
 import { usePlaybackStore } from '../store/playbackStore';
 
 // Custom render components for each media type
-const VideoRender: React.FC<{ action: TimelineAction; row: TimelineRow }> = ({ action }) => (
+const VideoRender: React.FC<{ action: TimelineAction; row: TimelineRow }> = ({  }) => (
   <div className="flex items-center justify-center h-full w-full bg-blue-600/50 border border-blue-400 rounded-sm px-2 overflow-hidden">
     <span className="text-white text-sm truncate">🎥 Video</span>
   </div>
 );
 
-const ImageRender: React.FC<{ action: TimelineAction; row: TimelineRow }> = ({ action }) => (
+const ImageRender: React.FC<{ action: TimelineAction; row: TimelineRow }> = ({  }) => (
   <div className="flex items-center justify-center h-full w-full bg-green-600/50 border border-green-400 rounded-sm px-2 overflow-hidden">
     <span className="text-white text-sm truncate">🖼️ Image</span>
   </div>
 );
 
-const TextRender: React.FC<{ action: TimelineAction; row: TimelineRow }> = ({ action }) => (
+const TextRender: React.FC<{ action: TimelineAction; row: TimelineRow }> = ({  }) => (
   <div className="flex items-center justify-center h-full w-full bg-purple-600/50 border border-purple-400 rounded-sm px-2 overflow-hidden">
     <span className="text-white text-sm truncate">📝 Text</span>
   </div>
@@ -51,7 +51,6 @@ export const Timeline: React.FC = () => {
     selectMedia,
     deselectMedia,
     selectTrack,
-    deselectTrack,
     clearSelection,
   } = useTimelineStore();
 
@@ -59,8 +58,7 @@ export const Timeline: React.FC = () => {
     seek,
     currentTime,
     isPlaying,
-    play,
-    pause
+ 
   } = usePlaybackStore();
 
   const timelineStateRef = useRef<TimelineState>(null);
@@ -151,24 +149,24 @@ export const Timeline: React.FC = () => {
     selectTrack(trackId);
   };
 
-  const timelineContainerRef = useRef<HTMLDivElement>(null);
+  // const timelineContainerRef = useRef<HTMLDivElement>(null);
 
-  // Handler for clicks on the timeline container to seek
-  const handleTimelineClick = (e: MouseEvent<HTMLDivElement>) => {
-    const container = timelineContainerRef.current;
-    if (!container) return;
+  // // Handler for clicks on the timeline container to seek
+  // const handleTimelineClick = (e: MouseEvent<HTMLDivElement>) => {
+  //   const container = timelineContainerRef.current;
+  //   if (!container) return;
 
-    const rect = container.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const containerWidth = rect.width;
+  //   const rect = container.getBoundingClientRect();
+  //   const clickX = e.clientX - rect.left;
+  //   const containerWidth = rect.width;
 
-    // Calculate new time based on click position relative to container width
-    const newTime = (clickX / containerWidth) * maxEnd;
-    console.log(`Timeline clicked at x=${clickX}; seeking to time=${newTime.toFixed(2)}s`);
+  //   // Calculate new time based on click position relative to container width
+  //   const newTime = (clickX / containerWidth) * maxEnd;
+  //   console.log(`Timeline clicked at x=${clickX}; seeking to time=${newTime.toFixed(2)}s`);
 
-    // Update the shared playback state
-    seek(newTime);
-  };
+  //   // Update the shared playback state
+  //   seek(newTime);
+  // };
 
   return (
     <div className="bg-[#1a1a1a] overflow-hidden flex flex-col gap-2">
@@ -220,7 +218,7 @@ export const Timeline: React.FC = () => {
               selectMedia(action.id);
             }
           }}
-          onClickRow={(e: MouseEvent<HTMLElement>, { row, time }: { row: TimelineRow; time: number }) => {
+          onClickRow={(_e: MouseEvent<HTMLElement>, { row, time }: { row: TimelineRow; time: number }) => {
             handleTrackClick(row.id);
             // When clicking a row, also seek to that time
             if (typeof time === 'number') {

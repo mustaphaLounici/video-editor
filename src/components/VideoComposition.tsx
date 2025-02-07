@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  useVideoConfig, 
   AbsoluteFill, 
   Sequence, 
   Video 
@@ -95,7 +94,7 @@ const VideoSequence: React.FC<{ media: VideoMedia }> = ({ media }) => {
   );
 };
 
-const MediaSequence: React.FC<{ media: Media; isSelected: boolean }> = ({ media, isSelected }) => {
+const MediaSequence: React.FC<{ media: Media; isSelected: boolean }> = ({ media }) => {
   switch (media.type) {
     case 'image':
       return <ImageSequence media={media as ImageMedia} />;
@@ -144,7 +143,6 @@ const TrackSequence: React.FC<{ track: TimelineTrack; selectedMediaIds: string[]
 export const VideoComposition: React.FC<VideoCompositionProps> = ({
   tracks,
   selectedMediaIds,
-  config,
 }) => {
   if (!tracks.length || tracks.every((track) => !track.medias?.length)) {
     return (
